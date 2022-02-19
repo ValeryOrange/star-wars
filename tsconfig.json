@@ -4,6 +4,6 @@
     "compilerOptions": {
         "outDir": "dist",
         "rootDir": "src",
-        "lib": ["es6", "dom"]
+        "lib": ["es6", "es2017", "dom"]
     }
 }
