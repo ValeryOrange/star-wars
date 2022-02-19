@@ -1,0 +1,13 @@
+{
+  "name": "star wars",
+  "version": "1.0.0",
+  "description": "The epic battles in outer space",
+  "scripts": {
+    "compile": "tsc --watch",
+    "server": "node dist/server/index.js"
+  },
+  "devDependencies": {
+    "@tsconfig/node16": "^1.0.2",
+    "typescript": "^4.5.5"
+  }
+}
