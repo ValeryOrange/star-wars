@@ -1,3 +1,3 @@
-import { logger } from '../utilites/logger';
+import { logger } from '../utilities/logger';
 
 logger('Hello, server!');

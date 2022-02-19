@@ -4,7 +4,9 @@
   "description": "The epic battles in outer space",
   "scripts": {
     "compile": "tsc --watch",
-    "server": "node dist/server/index.js"
+    "server": "node dist/server/index.js",
+    "agent": "node dist/agent/index.js",
+    "player": "node dist/player/index.js"
   },
   "devDependencies": {
     "@tsconfig/node16": "^1.0.2",
