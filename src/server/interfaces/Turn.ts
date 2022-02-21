@@ -11,7 +11,7 @@ interface TurnableObject {
 /**
  * Методы для осуществления поворота в двумерном пространстве
  */
-export default abstract class Turn implements TurnableObject {
+export default class Turn implements TurnableObject {
     baseVelocity: number;
     velocityVector: VelocityVector;
 

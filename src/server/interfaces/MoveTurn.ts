@@ -10,7 +10,7 @@ interface MoveableTurnableObjects extends Move, Turn {}
 /**
  * методы для движения в многомерном пространстве
  */
-export default abstract class MoveTurn implements MoveableTurnableObjects {
+export default class MoveTurn implements MoveableTurnableObjects {
     pos: Position;
     velocityVector: VelocityVector;
     baseVelocity: number;

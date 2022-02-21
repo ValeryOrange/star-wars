@@ -12,7 +12,7 @@ interface MoveableObject {
 /**
  * методы для движения в многомерном пространстве
  */
-export default abstract class Move implements MoveableObject {
+export default class Move implements MoveableObject {
     pos: Position;
     velocityVector: VelocityVector;
 
