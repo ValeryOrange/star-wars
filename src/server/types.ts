@@ -4,7 +4,7 @@ export type Position = {
     [key: string]: number,
 };
 
-export type Velocity = {
+export type VelocityVector = {
     x: number,
     y: number,
     [key: string]: number,
