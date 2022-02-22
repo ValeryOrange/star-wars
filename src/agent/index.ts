@@ -1,3 +1,1 @@
-import { logger } from '../utilities/logger';
-
-logger('Hello, agent!');
+console.log('Hello, agent!');

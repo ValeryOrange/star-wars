@@ -34,8 +34,8 @@ export class TurnableSpaceship extends Turn {
     fuel: number;
     turnFuelCost: number;
 
-    constructor(baseVelocity: number, angle = 0, fuel: number, turnFuelCost: number = 0) {
-        super(baseVelocity, angle);
+    constructor(velocity: number | VelocityVector, angle = 0, fuel: number, turnFuelCost: number = 0) {
+        super(velocity, angle);
         this.fuel = fuel;
         this.turnFuelCost = turnFuelCost;
     }
@@ -59,8 +59,8 @@ export class TurnableMoveableSpaceship extends MoveTurn {
     moveFuelCost: number;
     turnFuelCost: number;
 
-    constructor(pos: Position = {x: 0, y: 0}, baseVelocity: number, angle = 0, fuel: number, turnFuelCost: number = 0, moveFuelCost: number = 0) {
-        super(pos, baseVelocity, angle);
+    constructor(pos: Position = {x: 0, y: 0}, velocity: number | VelocityVector, angle = 0, fuel: number, turnFuelCost: number = 0, moveFuelCost: number = 0) {
+        super(pos, velocity, angle);
         this.fuel = fuel;
         this.moveFuelCost = moveFuelCost;
         this.turnFuelCost = turnFuelCost;

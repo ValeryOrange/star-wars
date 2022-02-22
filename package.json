@@ -6,10 +6,14 @@
     "compile": "tsc --watch",
     "server": "node dist/server/index.js",
     "agent": "node dist/agent/index.js",
-    "player": "node dist/player/index.js"
+    "player": "node dist/player/index.js",
+    "test": "jest src"
   },
   "devDependencies": {
     "@tsconfig/node16": "^1.0.2",
+    "@types/jest": "^27.4.0",
+    "jest": "^27.5.1",
+    "ts-jest": "^27.1.3",
     "typescript": "^4.5.5"
   }
 }

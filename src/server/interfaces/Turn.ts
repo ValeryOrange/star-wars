@@ -19,9 +19,22 @@ export default class Turn implements TurnableObject {
      * @param baseVelocity скорость движения по прямой
      * @param angle угол поворота в градусах
      */
-    constructor(baseVelocity: number, angle = 0) {
-        this.baseVelocity = baseVelocity;
-        this.velocityVector = Turn.setVelocityVector(baseVelocity, angle);
+    constructor(velocity: VelocityVector | number, angle = 0) {
+        if (typeof velocity === 'number') {
+            this.baseVelocity = velocity;
+            this.velocityVector = Turn.setVelocityVector(velocity, angle);
+        } else {
+            this.velocityVector = velocity;
+            this.baseVelocity = Turn.setBaseVelocity(velocity);
+        }
+    }
+
+    static setBaseVelocity(velocity: VelocityVector): number {
+        const velocitySquare = Object.values(velocity).reduce((squareSum: number, value: number) => {
+            return squareSum + value * value;
+        }, 0);
+        const baseVelocity = Math.sqrt(velocitySquare);
+        return baseVelocity;
     }
 
     /**

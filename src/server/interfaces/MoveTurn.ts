@@ -20,10 +20,15 @@ export default class MoveTurn implements MoveableTurnableObjects {
      * @param baseVelocity скорость движения по прямой
      * @param angle угол поворота в градусах
      */
-    constructor(pos: Position = {x: 0, y: 0}, baseVelocity: number, angle = 0) {
-        this.baseVelocity = baseVelocity;
-        this.velocityVector = MoveTurn.setVelocityVector(baseVelocity, angle);
+    constructor(pos: Position = {x: 0, y: 0}, velocity: number | VelocityVector, angle = 0) {
         this.pos = pos;
+        if (typeof velocity === 'number') {
+            this.baseVelocity = velocity;
+            this.velocityVector = Turn.setVelocityVector(velocity, angle);
+        } else {
+            this.velocityVector = velocity;
+            this.baseVelocity = Turn.setBaseVelocity(velocity);
+        }
     }
 
     /**
@@ -31,6 +36,10 @@ export default class MoveTurn implements MoveableTurnableObjects {
      * @param time время движения
      */
     public move(time: number) {
+        const isResting = Object.values(this.velocityVector).every(item => item === 0);
+        if (isResting) {
+            throw new Error('Cannot move a resting object!');
+        }
         this.changeCoordinates(time);
     }
 
@@ -40,34 +49,8 @@ export default class MoveTurn implements MoveableTurnableObjects {
      */
     changeCoordinates(time: number) {
         for (const [key, value] of Object.entries(this.pos)) {
-            this.pos[key] = MoveTurn.setNewCoord(value, this.velocityVector[key], time);
+            this.pos[key] = Move.setNewCoord(value, this.velocityVector[key], time);
         }
-    }
-
-    /**
-     * определяет значение координаты в конце движения
-     * @param initCoord начальная координата
-     * @param velocity вектор скорости вдоль соответствующей оси
-     * @param time время движения
-     */
-    static setNewCoord(initCoord: number, velocity: number, time: number): number {
-        return initCoord + velocity * time;
-    }
-
-    /**
-     * устанавливает двумерное значение скорости
-     * @param baseVelocity скорость по прямой
-     * @param angle угол поворота в градусах на декартовой плоскости
-     * @returns двумерное значение скорости, где x - скорость по вертикали,
-     *          y - по горизонтали
-     */
-    static setVelocityVector(baseVelocity: number, angle: number): VelocityVector {
-        const angleRad = angle * Math.PI / 180;
-        const velocityVector = {
-            x: baseVelocity * Math.cos(angleRad),
-            y: baseVelocity * Math.sin(angleRad),
-        };
-        return velocityVector;
     }
 
     /**
@@ -75,7 +58,7 @@ export default class MoveTurn implements MoveableTurnableObjects {
      * @param angle угол поворота в градусах
      */
     changeVelocityDirection(angle: number) {
-        this.velocityVector = MoveTurn.setVelocityVector(this.baseVelocity, angle);
+        this.velocityVector = Turn.setVelocityVector(this.baseVelocity, angle);
     }
 
     /**

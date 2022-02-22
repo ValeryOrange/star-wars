@@ -20,7 +20,7 @@ export default class Move implements MoveableObject {
      * @param velocityVector вектор скорости на игровом поле
      * @param pos начальная позиция
      */
-    constructor(velocity: VelocityVector, pos: Position) {
+    constructor(velocity: VelocityVector = {x: 0, y: 0}, pos: Position = {x: 0, y: 0}) {
         this.velocityVector = velocity;
         this.pos = pos;
     }
@@ -30,6 +30,10 @@ export default class Move implements MoveableObject {
      * @param time время движения
      */
     public move(time: number) {
+        const isResting = Object.values(this.velocityVector).every(item => item === 0);
+        if (isResting) {
+            throw new Error('Cannot move a resting object!');
+        }
         this.changeCoordinates(time);
     }
 

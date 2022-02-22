@@ -13,13 +13,13 @@ export class MoveableTorpedo extends Move {
 }
 
 export class TurnableTorpedo extends Turn {
-    constructor(baseVelocity: number, angle = 0) {
-        super(baseVelocity, angle);
+    constructor(velocity: number | VelocityVector, angle = 0) {
+        super(velocity, angle);
     }
 }
 
 export class TurnableMoveableTorpedo extends MoveTurn {
-    constructor(pos: Position, baseVelocity: number, angle: number = 0) {
-        super(pos, baseVelocity, angle);
+    constructor(pos: Position, velocity: number | VelocityVector, angle: number = 0) {
+        super(pos, velocity, angle);
     }
 }
