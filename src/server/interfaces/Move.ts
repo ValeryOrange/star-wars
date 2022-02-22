@@ -17,6 +17,7 @@ export default class Move implements MoveableObject {
     velocityVector: VelocityVector;
 
     /**
+     * по умолчанию создаем движимый объект в двумерном пространстве
      * @param velocityVector вектор скорости на игровом поле
      * @param pos начальная позиция
      */
