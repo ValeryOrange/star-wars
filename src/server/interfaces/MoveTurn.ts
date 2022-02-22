@@ -14,6 +14,7 @@ export default class MoveTurn implements MoveableTurnableObjects {
     pos: Position;
     velocityVector: VelocityVector;
     baseVelocity: number;
+    angle: number;
 
     /**
      * @param pos начальная позиция
@@ -24,10 +25,12 @@ export default class MoveTurn implements MoveableTurnableObjects {
         this.pos = pos;
         if (typeof velocity === 'number') {
             this.baseVelocity = velocity;
-            this.velocityVector = Turn.setVelocityVector(velocity, angle);
+            this.angle = Turn.calculateAngleRad(angle);
+            this.velocityVector = Turn.setVelocityVector(velocity, this.angle);
         } else {
             this.velocityVector = velocity;
             this.baseVelocity = Turn.setBaseVelocity(velocity);
+            this.angle = Turn.setAngle(velocity);
         }
     }
 
@@ -55,9 +58,10 @@ export default class MoveTurn implements MoveableTurnableObjects {
 
     /**
      * изменяет направление вектора скорости
-     * @param angle угол поворота в градусах
+     * @param angle угол поворота в радианах
      */
     changeVelocityDirection(angle: number) {
+        this.angle = angle;
         this.velocityVector = Turn.setVelocityVector(this.baseVelocity, angle);
     }
 
@@ -66,6 +70,11 @@ export default class MoveTurn implements MoveableTurnableObjects {
      * @param angle угол поворота в градусах
      */
     public turn(angle: number) {
-        this.changeVelocityDirection(angle);
+        if (!angle) {
+            throw new Error(('Cannot turn this object with 0 angle'));
+        }
+        const angleRad = Turn.calculateAngleRad(angle);
+        const turn = this.angle + angleRad;
+        this.changeVelocityDirection(turn);
     }
 }
